@@ -1,0 +1,314 @@
+# antalya-
+Antalyanın gezilip görülecek yerlerini,tarihçesini,konumlarını bulabileceğiniz bir yer
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antalya: Tarih ve Doğanın Buluşma Noktası</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1542051841857-5f90071e7989?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .infographic-line::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: #e2e8f0;
+            transform: translateX(-50%);
+        }
+
+        @media (max-width: 768px) {
+            .infographic-line::before {
+                left: 20px;
+            }
+        }
+
+        .loading-spinner {
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Hero Section -->
+    <header class="h-screen flex items-center justify-center text-center text-white hero-gradient relative">
+        <div class="px-4">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 drop-shadow-lg">ANTALYA</h1>
+            <p class="text-xl md:text-2xl font-light max-w-2xl mx-auto drop-shadow-md">
+                Akdeniz'in İncisi: Tarihin, Denizin ve Güneşin Eşsiz Uyumu
+            </p>
+            <div class="mt-8 flex flex-col md:flex-row gap-4 justify-center items-center">
+                <a href="#tarihce" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full transition duration-300 font-semibold shadow-lg">Keşfetmeye Başla</a>
+                <a href="#ai-assistant" class="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white border border-white/30 px-8 py-3 rounded-full transition duration-300 font-semibold shadow-lg">
+                    ✨ Akıllı Rehber'e Sor
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- Tarihçe Section -->
+    <section id="tarihce" class="py-20 px-4 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-slate-900 mb-2">Zaman Tünelinde Antalya</h2>
+            <p class="text-slate-600 italic">"Dünyanın en güzel yeri..."</p>
+        </div>
+
+        <div class="relative infographic-line">
+            <!-- Timeline items keep existing structure -->
+            <div class="mb-12 flex flex-col md:flex-row items-center justify-between w-full">
+                <div class="order-1 md:w-5/12"></div>
+                <div class="z-20 flex items-center order-1 bg-orange-500 shadow-xl w-8 h-8 rounded-full">
+                    <h1 class="mx-auto font-semibold text-lg text-white">1</h1>
+                </div>
+                <div class="order-1 bg-white rounded-lg shadow-xl md:w-5/12 px-6 py-4 mt-4 md:mt-0 border-t-4 border-orange-500">
+                    <h3 class="mb-1 font-bold text-slate-900 text-xl">Kuruluş: Attaleia</h3>
+                    <p class="text-sm leading-snug tracking-wide text-slate-600">M.Ö. 2. yüzyılda Bergama Kralı II. Attalos tarafından kuruldu.</p>
+                </div>
+            </div>
+            <!-- ... more items ... -->
+        </div>
+    </section>
+
+    <!-- AI ASSISTANT SECTION ✨ -->
+    <section id="ai-assistant" class="py-20 bg-slate-900 text-white overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">✨ Akıllı Antalya Rehberi</h2>
+                    <p class="text-slate-400 mb-8 text-lg">
+                        Antalya hakkında merak ettiğiniz her şeyi yapay zekaya sorun. Tarihi hikayelerden gizli kalmış koylara kadar en güncel bilgileri alın.
+                    </p>
+                    
+                    <div class="bg-slate-800 p-6 rounded-2xl shadow-2xl border border-slate-700">
+                        <textarea id="ai-input" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-4 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition mb-4" rows="3" placeholder="Örn: Antalya'da çocuklarla yapılacak en iyi aktiviteler neler?"></textarea>
+                        <button id="ai-btn" onclick="askGemini()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
+                            <span>✨ Soruyu Yanıtla</span>
+                            <div id="ai-loader" class="loading-spinner hidden"></div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/50 min-h-[300px] rounded-2xl p-8 border border-slate-700 relative">
+                    <div id="ai-response" class="text-slate-300 leading-relaxed whitespace-pre-line italic">
+                        Burada yapay zeka rehberinizin yanıtlarını göreceksiniz...
+                    </div>
+                    <div class="absolute bottom-4 right-4 text-xs text-slate-500">Powered by Gemini AI</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gezilecek Yerler Section -->
+    <section id="gezilecek-yerler" class="py-20 bg-slate-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold">Gezilmesi Gereken Duraklar</h2>
+                    <p class="text-slate-600">Sizin için seçtiğimiz ikonik noktalar</p>
+                </div>
+                <button onclick="openPlanner()" class="mt-4 md:mt-0 bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-full font-semibold transition flex items-center gap-2">
+                    ✨ Bana Özel Rota Oluştur
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Cards from original code... -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg transition transform hover:-translate-y-2">
+                    <img src="https://images.unsplash.com/photo-1590424753062-3251f1c6aa91?auto=format&fit=crop&w=800&q=80" alt="Kaleiçi" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-orange-500 uppercase tracking-wider">Şehir Merkezi</span>
+                        <h3 class="text-xl font-bold mt-2">Kaleiçi (Old Town)</h3>
+                        <p class="text-slate-600 text-sm mt-3">Osmanlı evleri, dar sokakları ve antik limanıyla şehrin kalbi.</p>
+                    </div>
+                </div>
+                <!-- ... other cards ... -->
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL: AI ROUTE PLANNER ✨ -->
+    <div id="planner-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl">
+            <div class="bg-teal-600 p-6 text-white flex justify-between items-center">
+                <h3 class="text-2xl font-bold">✨ AI Rota Planlayıcı</h3>
+                <button onclick="closePlanner()" class="text-2xl">&times;</button>
+            </div>
+            <div class="p-8">
+                <div id="planner-form">
+                    <p class="text-slate-600 mb-6">Antalya'daki vaktinizi en iyi şekilde değerlendirmek için size özel bir plan hazırlayalım.</p>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Kaç gününüz var?</label>
+                            <input type="number" id="plan-days" class="w-full border rounded-xl p-3" value="3" min="1" max="10">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">İlgi alanlarınız neler?</label>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="toggleTag(this)" class="tag-btn border px-4 py-1 rounded-full text-sm hover:bg-teal-50">Tarih</button>
+                                <button onclick="toggleTag(this)" class="tag-btn border px-4 py-1 rounded-full text-sm hover:bg-teal-50">Deniz/Güneş</button>
+                                <button onclick="toggleTag(this)" class="tag-btn border px-4 py-1 rounded-full text-sm hover:bg-teal-50">Doğa Yürüyüşü</button>
+                                <button onclick="toggleTag(this)" class="tag-btn border px-4 py-1 rounded-full text-sm hover:bg-teal-50">Gece Hayatı</button>
+                                <button onclick="toggleTag(this)" class="tag-btn border px-4 py-1 rounded-full text-sm hover:bg-teal-50">Çocuklarla Tatil</button>
+                            </div>
+                        </div>
+                        <button onclick="generatePlan()" id="plan-btn" class="w-full bg-teal-600 text-white font-bold py-3 rounded-xl mt-6 flex items-center justify-center gap-2">
+                            <span>✨ Planı Hazırla</span>
+                            <div id="plan-loader" class="loading-spinner hidden"></div>
+                        </button>
+                    </div>
+                </div>
+                <div id="planner-result" class="hidden max-h-[400px] overflow-y-auto pr-2 text-slate-700">
+                    <!-- AI Plan will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-orange-500 text-white">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div><div class="text-4xl font-bold mb-2">300+</div><p class="text-sm opacity-90">Güneşli Gün</p></div>
+            <div><div class="text-4xl font-bold mb-2">200+</div><p class="text-sm opacity-90">Antik Kent</p></div>
+            <div><div class="text-4xl font-bold mb-2">640 km</div><p class="text-sm opacity-90">Sahil</p></div>
+            <div><div class="text-4xl font-bold mb-2">219</div><p class="text-sm opacity-90">Mavi Bayrak</p></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p>&copy; 2024 Antalya İnteraktif Rehber. AI Powered Experience.</p>
+        </div>
+    </footer>
+
+    <script>
+        // API CONFIGURATION
+        const apiKey = ""; // Environment handles this
+        const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        async function callGemini(prompt) {
+            let retries = 0;
+            const maxRetries = 5;
+            
+            while (retries < maxRetries) {
+                try {
+                    const response = await fetch(GEMINI_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }],
+                            systemInstruction: { 
+                                parts: [{ text: "Sen profesyonel bir Antalya turizm rehberisin. Yanıtlarını Türkçe, nazik ve bilgilendirici bir dille ver. Görsel bir sunum için Markdown formatını kullanabilirsin." }] 
+                            }
+                        })
+                    });
+                    
+                    if (!response.ok) throw new Error('API Error');
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
+                } catch (error) {
+                    retries++;
+                    const delay = Math.pow(2, retries) * 500;
+                    await new Promise(res => setTimeout(res, delay));
+                    if (retries === maxRetries) return "Üzgünüm, şu an bağlantı kuramıyorum. Lütfen daha sonra tekrar deneyin.";
+                }
+            }
+        }
+
+        // AKILLI REHBER ✨
+        async function askGemini() {
+            const input = document.getElementById('ai-input');
+            const responseDiv = document.getElementById('ai-response');
+            const loader = document.getElementById('ai-loader');
+            const btn = document.getElementById('ai-btn');
+
+            if (!input.value.trim()) return;
+
+            loader.classList.remove('hidden');
+            btn.disabled = true;
+            responseDiv.classList.add('opacity-50');
+
+            const result = await callGemini(`Antalya hakkında şu soruyu cevapla: ${input.value}`);
+            
+            responseDiv.innerHTML = result;
+            responseDiv.classList.remove('opacity-50');
+            loader.classList.add('hidden');
+            btn.disabled = false;
+        }
+
+        // AI PLANNER ✨
+        let selectedTags = [];
+        function toggleTag(btn) {
+            btn.classList.toggle('bg-teal-600');
+            btn.classList.toggle('text-white');
+            const tag = btn.innerText;
+            if (selectedTags.includes(tag)) {
+                selectedTags = selectedTags.filter(t => t !== tag);
+            } else {
+                selectedTags.push(tag);
+            }
+        }
+
+        function openPlanner() { document.getElementById('planner-modal').classList.remove('hidden'); }
+        function closePlanner() { document.getElementById('planner-modal').classList.add('hidden'); }
+
+        async function generatePlan() {
+            const days = document.getElementById('plan-days').value;
+            const loader = document.getElementById('plan-loader');
+            const resultDiv = document.getElementById('planner-result');
+            const formDiv = document.getElementById('planner-form');
+
+            loader.classList.remove('hidden');
+
+            const prompt = `Antalya için ${days} günlük bir gezi rotası oluştur. İlgi alanlarım: ${selectedTags.join(', ')}. Her günü başlıklarla ayır ve kısa ipuçları ekle.`;
+            const result = await callGemini(prompt);
+
+            resultDiv.innerHTML = `<div class='prose prose-slate'>${result.replace(/\n/g, '<br>')}</div>`;
+            resultDiv.classList.remove('hidden');
+            formDiv.classList.add('hidden');
+            loader.classList.add('hidden');
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
